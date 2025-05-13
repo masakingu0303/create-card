@@ -16,19 +16,17 @@ const App = () => {
     img: ''
   });
 
-  const [imageUrl, setImageUrl] = useState('');
-  const cardRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleImage = (e) => {
-    const file = e.target.files[0];
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       const url = URL.createObjectURL(file);
-      setImageUrl(url);
       setInput(prev => ({ ...prev, img: url }));
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -41,7 +39,6 @@ const App = () => {
       def: '2100',
       img: '../public/photo.png'
     });
-    setImageUrl('');
   };
 
   const handleSaveImage = async () => {
